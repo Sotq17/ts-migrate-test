@@ -1,17 +1,19 @@
 import React from 'react'
 import { BrowserRouter as Router, useHistory } from 'react-router-dom'
 
-export default () => {
+const Hoge = () => {
   const history = useHistory()
 
   const handleClick = () => {
-    history.push('/hoge')
+    history.push('/')
   }
 
   return (
     <div>
-      <p>TOP</p>
-      <button onClick={handleClick}>hoge</button>
+      <p>Hoge</p>
+      <button onClick={handleClick}>Top</button>
     </div>
   )
 }
+
+export default Hoge

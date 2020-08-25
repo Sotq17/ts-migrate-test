@@ -1,29 +1,27 @@
-const webpack = require('webpack');
+const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackplugin = require('html-webpack-plugin')
 
-module.exports = (env, options)  => ({
-  devtool: (options.mode === 'development' ? 'source-map' : false),
+module.exports = (env, options) => ({
+  devtool: options.mode === 'development' ? 'source-map' : false,
   devServer: {
-    contentBase: (options.mode === 'development' ? './dist' : './build'),
+    contentBase: options.mode === 'development' ? './dist' : './build',
     port: 3000,
     host: '0.0.0.0',
     historyApiFallback: {
-      rewrites: [
-        { from: /^\/$/, to: 'index.html' },
-      ],
+      rewrites: [{ from: /^\/$/, to: 'index.html' }]
     },
-    disableHostCheck: true,
+    disableHostCheck: true
   },
 
   mode: 'development',
   entry: {
-    user: [`${path.join(__dirname, 'src')}/jsx/user.jsx`],
+    user: [`${path.join(__dirname, 'src')}/jsx/index.jsx`]
   },
   output: {
     path: `${__dirname}/${options.mode === 'development' ? 'dist' : 'build'}/`,
     filename: 'js/[name].js',
-    publicPath: '/',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -38,19 +36,19 @@ module.exports = (env, options)  => ({
         test: /\.pug$/,
         use: {
           loader: 'pug-loader',
-          options: options.mode === 'production' ? { pretty: true } : {},
-        },
-      },
+          options: options.mode === 'production' ? { pretty: true } : {}
+        }
+      }
     ]
   },
   resolve: {
     modules: [`${__dirname}/src`, 'node_modules'],
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx']
   },
   plugins: [
     new HtmlWebpackplugin({
       template: './src/pug/index.pug',
-      favicon: './src/img/common/favicon.png',
-    }),
+      favicon: './src/img/common/favicon.png'
+    })
   ]
 })
