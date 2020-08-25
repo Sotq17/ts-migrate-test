@@ -16,7 +16,7 @@ module.exports = (env, options) => ({
 
   mode: 'development',
   entry: {
-    user: [`${path.join(__dirname, 'src')}/jsx/index.jsx`]
+    user: [`${path.join(__dirname, 'src')}/tsx/index.tsx`]
   },
   output: {
     path: `${__dirname}/${options.mode === 'development' ? 'dist' : 'build'}/`,
@@ -26,10 +26,10 @@ module.exports = (env, options) => ({
   module: {
     rules: [
       {
-        test: /\.js[x]?/,
+        test: /\.ts[x]?/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
+          loader: 'ts-loader'
         }
       },
       {
@@ -43,7 +43,7 @@ module.exports = (env, options) => ({
   },
   resolve: {
     modules: [`${__dirname}/src`, 'node_modules'],
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.ts', '.tsx']
   },
   plugins: [
     new HtmlWebpackplugin({
